@@ -6,6 +6,7 @@
     "format": "prettier --write 'src/**/*.{js,ts,json,md}'"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
     "eslint": "^9.28.0",
@@ -15,5 +16,9 @@
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
   }
 }
