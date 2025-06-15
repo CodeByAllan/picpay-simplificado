@@ -24,7 +24,16 @@ export class User {
   password!: string;
   @Column({ type: 'enum', enum: UserType })
   type!: UserType;
-  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 2,
+    default: 0.0,
+    transformer: {
+      to: (value: number) => value,
+      from: (value: string) => Number(value),
+    },
+  })
   balance!: number;
   @CreateDateColumn()
   createdAt!: Date;
