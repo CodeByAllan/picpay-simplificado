@@ -8,6 +8,7 @@ import { ITransferService } from './transfer-service.interface';
 import { User } from '../entities/user.entity';
 import { UnauthorizedError } from '../errors/unauthorized.error';
 import { TimeoutError } from '../errors/timeout.error';
+import { DepositDto } from '../dtos/deposit.dto';
 
 export class TransferService implements ITransferService {
   constructor(private readonly repo: Repository<User>) {}
@@ -69,5 +70,16 @@ export class TransferService implements ITransferService {
       await manager.save([payee, payer]);
       await this.notify(3);
     });
+  }
+  async deposit(dto: DepositDto): Promise<void> {
+    const user = await this.repo.findOne({
+      where: { document: dto.document.value },
+      withDeleted: false,
+    });
+    if (!user) {
+      throw new NotFoundError('User');
+    }
+    user.balance += Number(dto.amount.value);
+    await this.repo.save(user);
   }
 }

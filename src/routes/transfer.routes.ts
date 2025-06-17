@@ -9,5 +9,6 @@ const repo = AppDataSource.getRepository(User);
 const service = new TransferService(repo);
 const controller = new TransferController(service);
 transferRoutes.route('/transfer').post(controller.payment);
+transferRoutes.route('/deposit').post(controller.deposit);
 
 export default transferRoutes;
